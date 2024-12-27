@@ -1,23 +1,26 @@
 import React, { useEffect, useState } from "react";
 import "./product.css";
 import axios from "axios";
-
 const Product = () => {
     const [products, setProducts] = useState([]);
+    const [filteredProducts, setFilteredProducts] = useState([]);
     const [currentProducts, setCurrentProducts] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [searchText, setSearchText] = useState("");
     const [loading, setLoading] = useState(true);
     const [sortOption, setSortOption] = useState("default");
     const productsPerPage = 4;
-
     useEffect(() => {
         const fetchProducts = async () => {
             try {
                 setLoading(true);
                 const response = await axios.get("https://fakestoreapi.com/products");
-                setProducts(response.data);
-                setCurrentProducts(response.data.slice(0, productsPerPage));  // Initialize with the first page of products
+                const productsWithRatings = response.data.map((product) => ({
+                    ...product,
+                    rating: product.rating || { rate: 0 }, 
+                }));
+                setProducts(productsWithRatings);
+                setFilteredProducts(productsWithRatings); 
             } catch (error) {
                 console.error("Error fetching products:", error);
             } finally {
@@ -26,16 +29,14 @@ const Product = () => {
         };
         fetchProducts();
     }, []);
-
     useEffect(() => {
         const indexOfLastProduct = currentPage * productsPerPage;
         const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
-        setCurrentProducts(products.slice(indexOfFirstProduct, indexOfLastProduct));
-    }, [currentPage, products]);
-
+        const productsToShow = filteredProducts.slice(indexOfFirstProduct, indexOfLastProduct);
+        setCurrentProducts(productsToShow);
+    }, [currentPage, filteredProducts]);
     useEffect(() => {
-        // Sort products based on the selected option
-        let sortedProducts = [...currentProducts];
+        let sortedProducts = [...filteredProducts];
         if (sortOption === "rating-asc") {
             sortedProducts.sort((a, b) => a.rating.rate - b.rating.rate);
         } else if (sortOption === "rating-desc") {
@@ -45,17 +46,14 @@ const Product = () => {
         } else if (sortOption === "price-desc") {
             sortedProducts.sort((a, b) => b.price - a.price);
         }
-        setCurrentProducts(sortedProducts);
-    }, [sortOption, currentPage]);
-
-    const totalPages = Math.ceil(products.length / productsPerPage);
-
+        setFilteredProducts(sortedProducts);
+        setCurrentPage(1);
+    }, [sortOption]);
     const handlePageChange = (pageNumber) => {
-        if (pageNumber > 0 && pageNumber <= totalPages) {
+        if (pageNumber > 0 && pageNumber <= Math.ceil(filteredProducts.length / productsPerPage)) {
             setCurrentPage(pageNumber);
         }
     };
-
     const handleSearchChange = (event) => {
         const value = event.target.value.toLowerCase();
         setSearchText(value);
@@ -63,14 +61,12 @@ const Product = () => {
         const filtered = products.filter((product) =>
             product.title.toLowerCase().includes(value)
         );
-        setCurrentProducts(filtered.slice(0, productsPerPage));  // Reset to first page of filtered products
-        setCurrentPage(1);
+        setFilteredProducts(filtered);
+        setCurrentPage(1); 
     };
-
     const handleSortChange = (event) => {
         setSortOption(event.target.value);
     };
-
     const handleDragStart = (index) => (event) => {
         event.dataTransfer.setData("draggedIndex", index);
     };
@@ -83,12 +79,20 @@ const Product = () => {
         const [draggedItem] = updatedProducts.splice(draggedIndex, 1);
         updatedProducts.splice(index, 0, draggedItem);
 
+        const globalIndex = (currentPage - 1) * productsPerPage + index;
+        const updatedFilteredProducts = [...filteredProducts];
+        updatedFilteredProducts.splice(globalIndex, 0, draggedItem);
+        updatedFilteredProducts.splice(draggedIndex, 1);
+
+        setFilteredProducts(updatedFilteredProducts);
         setCurrentProducts(updatedProducts);
     };
 
     const handleDragOver = (event) => {
         event.preventDefault();
     };
+
+    const totalPages = Math.ceil(filteredProducts.length / productsPerPage);
 
     return (
         <div className="cont">
@@ -131,7 +135,7 @@ const Product = () => {
                             </div>
                         ))}
                     </div>
-                    {products.length > 0 && (
+                    {filteredProducts.length > 0 && (
                         <div className="pagination">
                             <button
                                 onClick={() => handlePageChange(currentPage - 1)}
