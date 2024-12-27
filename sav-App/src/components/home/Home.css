@@ -1,0 +1,144 @@
+.cont {
+    min-height: 110vh;
+    background: url(https://image.freepik.com/free-photo/shopping-online-home-concept-blue-background-copyspace_1205-6303.jpg)no-repeat ;
+    background-size: cover;
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+
+.cont1 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    margin-top: 50px;
+    width: 100%;
+}
+
+.cont2 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    width: 100%; 
+}
+
+.cont2 .input {
+    width: 360px;
+    border: none;
+    outline-color: #335569;
+    padding: 7px 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.cont1 > h1 {
+    color: #335569;
+    font-size: 70px;
+    text-align: center;
+}
+
+.captcha-container {
+    margin-top: 20px;
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    display: flex;
+}
+
+.input1 {
+    width: 145px;
+    border: none;
+    outline-color: #335569;
+    padding: 5px 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.capcha {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.btn {
+    padding: 5px 10px;
+    font-size: 16px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background-color: #0056b3;
+}
+
+.btn2 {
+    padding: 10px 155px;
+    font-size: 16px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+@media (max-width: 768px) {
+    .cont {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .cont1, .cont2 {
+        width: 90%; 
+        margin-top: 20px;
+    }
+
+    .cont1 > h1 {
+        font-size: 50px;
+    }
+
+    .cont2 .input, .input1 {
+        width: 80%; 
+    }
+
+    .btn2 {
+        padding: 10px 60px;
+    }
+}
+
+@media (max-width: 480px) {
+    .cont {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .cont1, .cont2 {
+        width: 90%; 
+        margin-top: 10px;
+    }
+
+    .cont1 > h1 {
+        font-size: 40px; 
+        text-align: center;
+    }
+
+    .cont2 .input, .input1 {
+        width: 90%; 
+    }
+
+    .btn2 {
+        padding: 10px 40px; 
+    }
+}

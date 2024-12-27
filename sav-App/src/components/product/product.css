@@ -1,0 +1,175 @@
+.cont {
+    min-height: 100vh;
+    background: url(https://image.freepik.com/free-photo/shopping-online-home-concept-blue-background-copyspace_1205-6303.jpg) no-repeat;
+    background-size: cover;
+    background-attachment: fixed; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.products-cont {
+    min-height: 70vh;
+    min-width: 90vw;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 30px;
+    padding: 30px;
+}
+
+.box {
+    width: 250px;
+    height: 280px;
+    border-radius: 10px;
+    background-color: white;
+    box-shadow: 10px 10px 30px 2px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    overflow: hidden;
+    transition: transform 0.5s;
+}
+
+.box:hover {
+    transform: translateY(-10px);
+}
+
+.box p {
+    color: #3186b7;
+    height: 30px;
+    overflow: hidden;
+}
+
+.box h6 {
+    color: rgb(194, 194, 10);
+}
+
+.box-image {
+    width: 100%;
+    height: 60%;
+    background: transparent;
+}
+
+.pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.pagination button {
+    padding: 5px 10px;
+    color: #206a96;
+    background-color: transparent;
+    border: 2px solid;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.pagination button:hover {
+    color: white;
+    background-color: #04314c;
+}
+
+.main-int {
+    width: 400px;
+    height: 40px;
+    border-radius: 20px;
+    border: none;
+    outline: none;
+    background-color: #deeaf1;
+    padding: 15px;
+    padding-left: 30px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    justify-content: center;
+}
+
+
+.sort-container > select {
+    border: 1px solid #0b669f;
+    width: 100px;
+    padding: 7px 15px;
+    border-radius: 10px;
+    background-color: #deeaf1;
+    outline: none;
+}
+@media (max-width: 1200px) {
+    .sort-container > select {
+        width: 120px;
+        padding: 6px 12px;
+    }
+}
+@media (max-width: 992px) {
+    .sort-container > select {
+        width: 130px;
+        padding: 5px 10px;
+    }
+}
+@media (max-width: 768px) {
+    .sort-container > select {
+        width: 150px;
+        padding: 4px 8px;
+    }
+}
+@media (max-width: 576px) {
+    .sort-container > select {
+        width: 100%;
+        padding: 10px;
+    }
+}
+
+
+@media (max-width: 1200px) {
+    .products-cont {
+        gap: 20px;
+    }
+    .box {
+        width: 220px;
+        height: 220px;
+    }
+}
+
+@media (max-width: 992px) {
+    .main-int {
+        width: 300px;
+    }
+    .box {
+        width: 200px;
+        height: 200px;
+    }
+}
+
+@media (max-width: 768px) {
+    .products-cont {
+        gap: 15px;
+    }
+    .box {
+        width: 180px;
+        height: 180px;
+    }
+    .main-int {
+        width: 250px;
+    }
+}
+
+@media (max-width: 576px) {
+    .products-cont {
+        flex-direction: column;
+        gap: 15px;
+    }
+    .box {
+        width: 90%;
+        height: 200px;
+    }
+    .main-int {
+        width: 200px;
+        height: 35px;
+        padding: 10px;
+    }
+}
