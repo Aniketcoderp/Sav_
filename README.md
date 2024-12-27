@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-  <h1>sav-App</h1>
+  <h1>shop-App</h1>
   <p>
     This is a React-based application built with Vite. It uses several libraries to enhance functionality, 
     such as Axios for API requests, React Router DOM for routing, and Google reCAPTCHA for bot protection.
